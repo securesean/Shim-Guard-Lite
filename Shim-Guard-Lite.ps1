@@ -9,14 +9,14 @@
 # This is proof-of-concept so don't hate. Be sure to run this withx64 power shell on x64 systems 
 # because the VirtualRegistry fix will redirect the look ups if it's running as 32-bit program (aka WOW64 process)
 
-#Requires –version 3.0
+#Requires â€“version 3.0
 
-Function alertHandlerForCustomRegKey
+$alertHandlerForCustomRegKey =
 {
     Write-host "Something changed in Custom SDB Install Registry Key."
 }
 
-Function alertHandlerForInstallLocationRegKey
+$alertHandlerForInstallLocationRegKey =
 {
     Write-host "Something changed in Custom SDB Install Locations Registry Key."
 }
@@ -63,8 +63,8 @@ $installedSDBKeyQuery = "Select * from RegistryTreeChangeEvent where Hive='HKEY_
 
 # making the event notifer
 # Method 2: Call a function when event triggers
-Register-WmiEvent -Query $customKeyQuery -Action { alertHandlerForCustomRegKey  }
-Register-WmiEvent -Query $installedSDBKeyQuery -Action { alertHandlerForInstallLocationRegKey  }
+Register-WmiEvent -Query $customKeyQuery -Action $alertHandlerForCustomRegKey
+Register-WmiEvent -Query $installedSDBKeyQuery -Action $alertHandlerForInstallLocationRegKey
 
 # Method 1: Simple Wait
 #Register-WmiEvent -Query $query -SourceIdentifier KeyChanged
