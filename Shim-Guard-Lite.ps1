@@ -63,8 +63,8 @@ $installedSDBKeyQuery = "Select * from RegistryTreeChangeEvent where Hive='HKEY_
 
 # making the event notifer
 # Method 2: Call a function when event triggers
-Register-WmiEvent -Query $customKeyQuery -Action $alertHandlerForCustomRegKey
-Register-WmiEvent -Query $installedSDBKeyQuery -Action $alertHandlerForInstallLocationRegKey
+$x = Register-WmiEvent -Query $customKeyQuery -Action $alertHandlerForCustomRegKey
+$x = Register-WmiEvent -Query $installedSDBKeyQuery -Action $alertHandlerForInstallLocationRegKey
 
 # Method 1: Simple Wait
 #Register-WmiEvent -Query $query -SourceIdentifier KeyChanged
